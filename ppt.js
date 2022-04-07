@@ -22,7 +22,7 @@ module.exports.getBrowser = async debug => {
     page = await browser.newPage();
   } else {
     browser = await puppeteer.launch({
-      // headless: false,
+      headless: false,
       defaultViewport: null,
       args: ['--start-maximized'],
     });
