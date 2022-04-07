@@ -22,18 +22,22 @@ async function login() {
   await page.waitForNavigation({ waitUntil: 'networkidle0' });
 
   const cur_page = await page.url();
+  msg.substep(cur_page);
 
   if (String(cur_page).includes(options.LOGIN_DOMAIN)) {
+    msg.substep('onLoginPage');
     await onLoginPage();
     await page.waitForNavigation({ waitUntil: 'networkidle0' });
   }
 
   if (String(cur_page).includes(options.POSTAUTH_DOMAIN)) {
+    msg.substep('onPostAuthPage');
     await onPostAuthPage();
     await page.waitForNavigation({ waitUntil: 'networkidle0' });
   }
 
   if (String(cur_page).includes(options.DASHBOARD_URL)) {
+    msg.substep('onDashboard');
     await onDashboard();
   }
 
