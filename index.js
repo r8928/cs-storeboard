@@ -10,6 +10,10 @@ async function run() {
   const debug = false;
 
   page = (await getBrowser(debug)).page;
+  await page._client.send('Page.setDownloadBehavior', {
+    behavior: 'allow',
+    downloadPath: env.downloadPath,
+  });
   await login();
 
   await sleep(10000);

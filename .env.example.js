@@ -1,4 +1,5 @@
 module.exports.env = {
-  username: "",
-  password: "",
+  username: '',
+  password: '',
+  downloadPath: './',
 };
