@@ -15,4 +15,7 @@ module.exports.selectors = {
   POSTAUTH: {
     CONTINUE: '#successButtonId',
   },
+  DASHBOARD: {
+    PROFILE: ".profileText"
+  }
 };

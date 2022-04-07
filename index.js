@@ -2,9 +2,8 @@ const { getBrowser, getIframe, screenshot, setValue, type, getText, click, goto,
 const { env } = require('./.env');
 const { options, selectors } = require('./options');
 const { msg } = require('./msg');
-
-/** @var {puppeteer.Page} page */
-var page;
+const puppeteer = require('puppeteer');
+const { downloadRanker } = require('./downloadRanker');
 
 async function run() {
   const debug = false;
@@ -14,9 +13,9 @@ async function run() {
     behavior: 'allow',
     downloadPath: env.downloadPath,
   });
-  await login();
 
-  await sleep(10000);
+  await login(page);
+  await onDashboard(page);
 }
 
 async function login() {
@@ -25,34 +24,29 @@ async function login() {
 
   await goto(page, options.DASHBOARD_URL);
 
-  await page.waitForNavigation({ waitUntil: 'networkidle0' });
-
-  const cur_page = await page.url();
-  msg.substep(cur_page);
-
-  if (String(cur_page).includes(options.LOGIN_DOMAIN)) {
+  if (String(await page.url()).includes(options.LOGIN_DOMAIN)) {
     msg.substep('onLoginPage');
     await onLoginPage();
-    await page.waitForNavigation({ waitUntil: 'networkidle0' });
   }
 
-  if (String(cur_page).includes(options.POSTAUTH_DOMAIN)) {
+  if (String(await page.url()).includes(options.POSTAUTH_DOMAIN)) {
     msg.substep('onPostAuthPage');
     await onPostAuthPage();
-    await page.waitForNavigation({ waitUntil: 'networkidle0' });
-  }
-
-  if (String(cur_page).includes(options.DASHBOARD_URL)) {
-    msg.substep('onDashboard');
-    await onDashboard();
   }
 
   async function onLoginPage() {
-    await page.waitForSelector(selectors.LOGIN.SUBMIT);
-
-    await setValue(page, selectors.LOGIN.USER, env.username);
-    await setValue(page, selectors.LOGIN.PASSWORD, env.password);
+    await type(page, selectors.LOGIN.USER, env.username);
+    await type(page, selectors.LOGIN.PASSWORD, env.password);
     await click(page, selectors.LOGIN.SUBMIT);
+
+    try {
+      await page.waitForSelector('#errorMessage', {
+        timeout: 2000,
+        visible: true,
+      });
+
+      msg.error('PASSWORD ERROR');
+    } catch (error) {}
   }
 
   async function onPostAuthPage() {
@@ -61,7 +55,12 @@ async function login() {
   }
 }
 
-async function onDashboard() {
-  console.log('goooood to gooooo');
+/** @param {puppeteer.Page} page */
+async function onDashboard(page) {
+  await page.waitForSelector(selectors.DASHBOARD.PROFILE);
+  msg.step('onDashboard');
+  const resultHandle = await page.evaluate(downloadRanker);
+  TopModels = await resultHandle;
 }
+
 run();
