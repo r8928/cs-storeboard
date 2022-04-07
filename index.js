@@ -1,4 +1,4 @@
-const { getBrowser, getIframe, screenshot, setValue, type, getText, click, goto, } = require('./ppt'); // prettier-ignore
+const { getBrowser, getIframe, screenshot, setValue, type, getText, click, goto, sleep, } = require('./ppt'); // prettier-ignore
 const { env } = require('./.env');
 const { options, selectors } = require('./options');
 const { msg } = require('./msg');
@@ -11,6 +11,8 @@ async function run() {
 
   page = (await getBrowser(debug)).page;
   await login();
+
+  await sleep(10000);
 }
 
 async function login() {

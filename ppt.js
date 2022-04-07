@@ -166,3 +166,9 @@ module.exports.goto = async (page, url) => {
     waitUntil: 'networkidle0',
   });
 };
+
+module.exports.sleep = ms => {
+  return new Promise(resolve => {
+    setTimeout(resolve, ms);
+  });
+};
