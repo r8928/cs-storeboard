@@ -28,7 +28,7 @@ module.exports.getBrowser = async debug => {
     });
 
     page = await browser.newPage();
-    await page.setDefaultTimeout(120 * 1000);
+    await page.setDefaultTimeout(5 * 1000);
     await page.setViewport({
       width: 1366,
       height: 768,
@@ -132,7 +132,7 @@ module.exports.type = async (page, selector_name, value_name) => {
   await page.waitForSelector(selector_name);
 
   await page.focus(selector_name);
-  await click(page, selector_name);
+  await page.click(selector_name);
   await page.keyboard.type(value_name, { delay: 1 });
   // await page.type(selector_name, value_name, { delay: 1 });
 };
