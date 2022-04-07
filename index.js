@@ -1,3 +1,4 @@
+const path = require('path');
 const { getBrowser, getIframe, screenshot, setValue, type, getText, click, goto, sleep, } = require('./ppt'); // prettier-ignore
 const { env } = require('./.env');
 const { options, selectors } = require('./options');
@@ -9,13 +10,14 @@ async function run() {
   const debug = false;
 
   page = (await getBrowser(debug)).page;
-  await page._client.send('Page.setDownloadBehavior', {
-    behavior: 'allow',
-    downloadPath: env.downloadPath,
-  });
 
   await login(page);
   await onDashboard(page);
+
+  // msg.step('GOING TO SLEEP');
+  // await sleep(30000);
+
+  process.exit();
 }
 
 async function login() {
@@ -57,10 +59,31 @@ async function login() {
 
 /** @param {puppeteer.Page} page */
 async function onDashboard(page) {
+  await page.waitForNavigation({ waitUntil: 'networkidle0' });
   await page.waitForSelector(selectors.DASHBOARD.PROFILE);
   msg.step('onDashboard');
-  const resultHandle = await page.evaluate(downloadRanker);
-  TopModels = await resultHandle;
+
+  const downloadPath = path.resolve(env.downloadPath);
+  msg.step(downloadPath);
+
+  await page._client.send('Page.setDownloadBehavior', {
+    behavior: 'allow',
+    downloadPath,
+  });
+
+  // await page.exposeFunction('downloadRanker', new downloadRanker());
+  // const x = new downloadRanker();
+
+  try {
+    resultHandle = await page.evaluate(downloadRanker);
+
+    msg.step(resultHandle);
+  } catch (error) {
+    msg.error('FILES NOT DOWNLOADED');
+  }
+
+  // msg.step("waitForSelector('#DOWNLOAD_COMPLETED'");
+  await page.waitForSelector('#DOWNLOAD_COMPLETED');
 }
 
 run();

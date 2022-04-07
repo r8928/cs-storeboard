@@ -26,9 +26,9 @@ module.exports.downloadRanker = async () => {
     var url = window.URL.createObjectURL(blob);
     var a = document.createElement('a');
     a.href = url;
-    a.download = new Date()
-      .toISOString()
-      .replace(/\W+/g, '-')
+    a.download = 'AT&T MyResults - Historical Analysis'
+      .concat('-')
+      .concat(new Date().toISOString().replace(/\D+/g, '-'))
       .concat('-')
       .concat(filename)
       .concat('.xlsx');
@@ -57,6 +57,18 @@ module.exports.downloadRanker = async () => {
   };
 
   await GET(dict.RANKER_2_RAE);
+  console.log('RANKER_2_RAE');
+  await GET(dict.RANKER_2_LOCATION);
+  console.log('RANKER_2_LOCATION');
   await GET(dict.RANKER_1_RAE);
+  console.log('RANKER_1_RAE');
   await GET(dict.RANKER_1_LOCATION);
+  console.log('RANKER_1_LOCATION');
+
+  const div = document.createElement('div');
+  div.id = 'DOWNLOAD_COMPLETED';
+  document.body.appendChild(div);
+  console.log('DOWNLOAD_COMPLETED');
+
+  return 'DOWNLOAD_COMPLETED';
 };

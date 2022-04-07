@@ -28,7 +28,7 @@ module.exports.getBrowser = async debug => {
     });
 
     page = await browser.newPage();
-    await page.setDefaultTimeout(5 * 1000);
+    await page.setDefaultTimeout(30 * 1000);
     await page.setViewport({
       width: 1366,
       height: 768,
