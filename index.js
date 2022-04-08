@@ -60,7 +60,12 @@ async function login() {
 /** @param {puppeteer.Page} page */
 async function onDashboard(page) {
   await page.waitForNavigation({ waitUntil: 'networkidle0' });
-  await page.waitForSelector(selectors.DASHBOARD.PROFILE);
+  await sleep(10000);
+
+  await page.waitForSelector(selectors.DASHBOARD.PROFILE, {
+    timeout: 30000,
+    visible: true,
+  });
   msg.step('onDashboard');
 
   const downloadPath = path.resolve(env.downloadPath);
@@ -84,6 +89,7 @@ async function onDashboard(page) {
 
   // msg.step("waitForSelector('#DOWNLOAD_COMPLETED'");
   await page.waitForSelector('#DOWNLOAD_COMPLETED');
+  await sleep(3000);
 }
 
 run();
