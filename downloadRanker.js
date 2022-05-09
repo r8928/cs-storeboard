@@ -54,17 +54,9 @@ module.exports.downloadRanker = async () => {
     },
   ];
 
-  var monthDiff = (d1, d2) => {
-    var months;
-    months = (d2.getFullYear() - d1.getFullYear()) * 12;
-    months -= d1.getMonth();
-    months += d2.getMonth();
-    return months <= 0 ? 0 : months;
-  };
+  const months = [27];
 
-  const d1 = new Date('2020-02-01');
   const d2 = new Date();
-  const months = [d2];
 
   if (d2.getDate() <= 7) {
     months.push(new Date(new Date().setDate(-1)));
@@ -72,9 +64,9 @@ module.exports.downloadRanker = async () => {
   }
 
   for (let index = 0; index < months.length; index++) {
-    const month = months[index];
+    const diff = months[index];
 
-    const diff = monthDiff(d1, month);
+    const month = diff === 27 ? new Date() : new Date(new Date().setDate(0));
 
     const cur_dict = JSON.parse(JSON.stringify(dict));
 
