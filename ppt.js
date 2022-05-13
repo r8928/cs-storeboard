@@ -73,7 +73,10 @@ async function fasterRequests(page) {
       request.abort();
     } else if (['js', 'stylesheet'].includes(request.resourceType())) {
       if (cache[url]) {
-        request.respond(cache[url]);
+        try {
+          request.respond(cache[url]);
+        } catch (error) {}
+
         return;
       }
       request.continue();
