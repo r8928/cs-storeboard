@@ -1,7 +1,11 @@
 module.exports.downloadRanker = async () => {
+  const hierachyId = loginDisplayNode.hierarchyIdPath.split('|')[0];
+
   var GET = async ({ body, filename }) => {
     return fetch(
-      'https://www.e-access.att.com/DayBreak/apis/processRequest?HierachyId=148274400&HierachyLevel=0&masterDealerId=3898&channel=AUTHORIZED%20RETAIL',
+      'https://www.e-access.att.com/DayBreak/apis/processRequest?HierachyId=' +
+        hierachyId +
+        '&HierachyLevel=0&masterDealerId=3898&channel=AUTHORIZED%20RETAIL',
       {
         headers: {
           'content-type': 'application/x-www-form-urlencoded',
@@ -74,6 +78,7 @@ module.exports.downloadRanker = async () => {
       const d = cur_dict[j];
 
       d.body = d.body.replace(/Period%22%3A27/g, 'Period%22%3A' + diff);
+      d.body = d.body.replace('148274400', hierachyId);
 
       const filename = '-' + month.toISOString().split('T').shift();
 
