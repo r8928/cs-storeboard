@@ -99,6 +99,14 @@ async function fasterRequests(page) {
       return;
     }
 
+    if (
+      response.status() !== 200 ||
+      !('content-length' in response.headers()) ||
+      !response.headers()['content-length']
+    ) {
+      return;
+    }
+
     cache[url] = {
       status: response.status(),
       headers: response.headers(),
