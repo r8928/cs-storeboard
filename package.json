@@ -17,5 +17,8 @@
         "scrape"
     ],
     "author": "r8928",
-    "homepage": "https://bitbucket.org/talkgit/scrape-g-maps"
+    "homepage": "https://bitbucket.org/talkgit/scrape-g-maps",
+    "scripts": {
+        "start":"node index.js"
+    }
 }
