@@ -1,6 +1,13 @@
 module.exports.downloadRanker = async () => {
   const hierachyId = loginDisplayNode.hierarchyIdPath.split('|')[0];
 
+  const ranker1Metrics = encodeURIComponent(
+    '2082,76,1483,1939,2000,96,1674,1799,2388,68,1801,1800,1196,1908,1909,1910,1912,1913,1914,1904,1905,1906,2290,1435,2352,2357,1531,2621',
+  );
+  const ranker2Metrics = encodeURIComponent(
+    '1340,405,2497,1907,1911,1915,1673,2381,2029,1691,1692,1677,6,144,1171,787,2387,2613,2618,2355,2354,1507,1504',
+  );
+
   var GET = async ({ body, filename }) => {
     return fetch(
       'https://www.e-access.att.com/DayBreak/apis/processRequest?HierachyId=' +
@@ -41,19 +48,19 @@ module.exports.downloadRanker = async () => {
 
   var dict = [
     {
-      body: 'cmd=histAnalysisExport&addlData=%7B%22hierarchyId%22%3A148274400%2C%22masterDealerId%22%3A%223898%22%2C%22detailLevelId%22%3A%227%22%2C%22kpiIdList%22%3A%22405%2C2497%2C1907%2C1911%2C1915%2C1673%2C2381%2C2029%2C1691%2C1692%2C1677%2C6%2C144%2C1171%2C787%2C2387%2C2613%2C2618%2C2355%2C2354%2C1507%2C1504%22%2C%22startPeriod%22%3A27%2C%22endPeriod%22%3A27%2C%22timeScenario%22%3A2%2C%22goalType%22%3A%22goalType_3%22%2C%22showHierarchy%22%3Afalse%2C%22showValueChange%22%3Afalse%2C%22showPercentChange%22%3Afalse%2C%22showYoYValueChange%22%3Afalse%2C%22showYoYPercentChange%22%3Afalse%2C%22showAttainment%22%3Afalse%2C%22showLocId%22%3Afalse%2C%22showDlrCode%22%3Afalse%2C%22showCenters%22%3A%22N%22%2C%22autoExport%22%3Atrue%7D&secondLkupId=',
+      body: 'cmd=histAnalysisExport&addlData=%7B%22hierarchyId%22%3A148274400%2C%22masterDealerId%22%3A%223898%22%2C%22detailLevelId%22%3A%227%22%2C%22kpiIdList%22%3A%22KPI_ID_LIST2%22%2C%22startPeriod%22%3A27%2C%22endPeriod%22%3A27%2C%22timeScenario%22%3A2%2C%22goalType%22%3A%22goalType_3%22%2C%22showHierarchy%22%3Afalse%2C%22showValueChange%22%3Afalse%2C%22showPercentChange%22%3Afalse%2C%22showYoYValueChange%22%3Afalse%2C%22showYoYPercentChange%22%3Afalse%2C%22showAttainment%22%3Afalse%2C%22showLocId%22%3Afalse%2C%22showDlrCode%22%3Afalse%2C%22showCenters%22%3A%22N%22%2C%22autoExport%22%3Atrue%7D&secondLkupId=',
       filename: 'RANKER_2_LOCATION',
     },
     {
-      body: 'cmd=histAnalysisExport&addlData=%7B%22hierarchyId%22%3A148274400%2C%22masterDealerId%22%3A%223898%22%2C%22detailLevelId%22%3A%226%22%2C%22kpiIdList%22%3A%22405%2C2497%2C1907%2C1911%2C1915%2C1673%2C2381%2C2029%2C1691%2C1692%2C1677%2C6%2C144%2C1171%2C787%2C2387%2C2613%2C2618%2C2355%2C2354%2C1507%2C1504%22%2C%22startPeriod%22%3A27%2C%22endPeriod%22%3A27%2C%22timeScenario%22%3A2%2C%22goalType%22%3A%22goalType_3%22%2C%22showHierarchy%22%3Afalse%2C%22showValueChange%22%3Afalse%2C%22showPercentChange%22%3Afalse%2C%22showYoYValueChange%22%3Afalse%2C%22showYoYPercentChange%22%3Afalse%2C%22showAttainment%22%3Afalse%2C%22showLocId%22%3Afalse%2C%22showDlrCode%22%3Afalse%2C%22showCenters%22%3A%22N%22%2C%22autoExport%22%3Atrue%7D&secondLkupId=',
+      body: 'cmd=histAnalysisExport&addlData=%7B%22hierarchyId%22%3A148274400%2C%22masterDealerId%22%3A%223898%22%2C%22detailLevelId%22%3A%226%22%2C%22kpiIdList%22%3A%22KPI_ID_LIST2%22%2C%22startPeriod%22%3A27%2C%22endPeriod%22%3A27%2C%22timeScenario%22%3A2%2C%22goalType%22%3A%22goalType_3%22%2C%22showHierarchy%22%3Afalse%2C%22showValueChange%22%3Afalse%2C%22showPercentChange%22%3Afalse%2C%22showYoYValueChange%22%3Afalse%2C%22showYoYPercentChange%22%3Afalse%2C%22showAttainment%22%3Afalse%2C%22showLocId%22%3Afalse%2C%22showDlrCode%22%3Afalse%2C%22showCenters%22%3A%22N%22%2C%22autoExport%22%3Atrue%7D&secondLkupId=',
       filename: 'RANKER_2_RAE',
     },
     {
-      body: 'cmd=histAnalysisExport&addlData=%7B%22hierarchyId%22%3A148274400%2C%22masterDealerId%22%3A%223898%22%2C%22detailLevelId%22%3A%226%22%2C%22kpiIdList%22%3A%222082%2C76%2C1483%2C1939%2C2000%2C96%2C1674%2C1799%2C2388%2C68%2C1801%2C1800%2C1196%2C1908%2C1909%2C1910%2C1912%2C1913%2C1914%2C1904%2C1905%2C1906%2C2290%2C1435%2C2352%2C2357%2C1531%2C2621%22%2C%22startPeriod%22%3A27%2C%22endPeriod%22%3A27%2C%22timeScenario%22%3A2%2C%22goalType%22%3A%22goalType_3%22%2C%22showHierarchy%22%3Afalse%2C%22showValueChange%22%3Afalse%2C%22showPercentChange%22%3Afalse%2C%22showYoYValueChange%22%3Afalse%2C%22showYoYPercentChange%22%3Afalse%2C%22showAttainment%22%3Afalse%2C%22showLocId%22%3Afalse%2C%22showDlrCode%22%3Afalse%2C%22showCenters%22%3A%22N%22%2C%22autoExport%22%3Atrue%7D&secondLkupId=',
+      body: 'cmd=histAnalysisExport&addlData=%7B%22hierarchyId%22%3A148274400%2C%22masterDealerId%22%3A%223898%22%2C%22detailLevelId%22%3A%226%22%2C%22kpiIdList%22%3A%22KPI_ID_LIST1%22%2C%22startPeriod%22%3A27%2C%22endPeriod%22%3A27%2C%22timeScenario%22%3A2%2C%22goalType%22%3A%22goalType_3%22%2C%22showHierarchy%22%3Afalse%2C%22showValueChange%22%3Afalse%2C%22showPercentChange%22%3Afalse%2C%22showYoYValueChange%22%3Afalse%2C%22showYoYPercentChange%22%3Afalse%2C%22showAttainment%22%3Afalse%2C%22showLocId%22%3Afalse%2C%22showDlrCode%22%3Afalse%2C%22showCenters%22%3A%22N%22%2C%22autoExport%22%3Atrue%7D&secondLkupId=',
       filename: 'RANKER_1_RAE',
     },
     {
-      body: 'cmd=histAnalysisExport&addlData=%7B%22hierarchyId%22%3A148274400%2C%22masterDealerId%22%3A%223898%22%2C%22detailLevelId%22%3A%227%22%2C%22kpiIdList%22%3A%222082%2C76%2C1483%2C1939%2C2000%2C96%2C1674%2C1799%2C2388%2C68%2C1801%2C1800%2C1196%2C1908%2C1909%2C1910%2C1912%2C1913%2C1914%2C1904%2C1905%2C1906%2C2290%2C1435%2C2352%2C2357%2C1531%2C2621%22%2C%22startPeriod%22%3A27%2C%22endPeriod%22%3A27%2C%22timeScenario%22%3A2%2C%22goalType%22%3A%22goalType_3%22%2C%22showHierarchy%22%3Afalse%2C%22showValueChange%22%3Afalse%2C%22showPercentChange%22%3Afalse%2C%22showYoYValueChange%22%3Afalse%2C%22showYoYPercentChange%22%3Afalse%2C%22showAttainment%22%3Afalse%2C%22showLocId%22%3Afalse%2C%22showDlrCode%22%3Afalse%2C%22showCenters%22%3A%22N%22%2C%22autoExport%22%3Atrue%7D&secondLkupId=',
+      body: 'cmd=histAnalysisExport&addlData=%7B%22hierarchyId%22%3A148274400%2C%22masterDealerId%22%3A%223898%22%2C%22detailLevelId%22%3A%227%22%2C%22kpiIdList%22%3A%22KPI_ID_LIST1%22%2C%22startPeriod%22%3A27%2C%22endPeriod%22%3A27%2C%22timeScenario%22%3A2%2C%22goalType%22%3A%22goalType_3%22%2C%22showHierarchy%22%3Afalse%2C%22showValueChange%22%3Afalse%2C%22showPercentChange%22%3Afalse%2C%22showYoYValueChange%22%3Afalse%2C%22showYoYPercentChange%22%3Afalse%2C%22showAttainment%22%3Afalse%2C%22showLocId%22%3Afalse%2C%22showDlrCode%22%3Afalse%2C%22showCenters%22%3A%22N%22%2C%22autoExport%22%3Atrue%7D&secondLkupId=',
       filename: 'RANKER_1_LOCATION',
     },
   ];
@@ -79,6 +86,8 @@ module.exports.downloadRanker = async () => {
 
       d.body = d.body.replace(/Period%22%3A27/g, 'Period%22%3A' + diff);
       d.body = d.body.replace('148274400', hierachyId);
+      d.body = d.body.replace('KPI_ID_LIST1', ranker1Metrics);
+      d.body = d.body.replace('KPI_ID_LIST2', ranker2Metrics);
 
       const filename = '-' + month.toISOString().split('T').shift();
 
